@@ -2,7 +2,7 @@ import React from 'react';
 import './Cards.css';
 import Card from './Card.jsx';
 
-export default function Cards({cities}) {
+export default function Cards({cities, onClose}) {
   if(cities){
     return (
       <div className='cards'>
@@ -11,6 +11,8 @@ export default function Cards({cities}) {
             min={c.min}
             name={c.name}
             img={c.img}
+            onClose={onClose}
+            key={c.id}
             id={c.id}
           /> )}
       </div>

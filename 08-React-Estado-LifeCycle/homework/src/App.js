@@ -2,36 +2,47 @@ import React, { useState } from 'react';
 import './App.css';
 import Cards from './components/Cards';
 import Nav from './components/Nav';
-import data from './data'
+import Video from './components/Video';
 
 export default function App() {
-  const [cities, setCities] = useState(data);
+  const [cities, setCities] = useState([]);
+  const apiKey = '4ae2636d8dfbdc3044bede63951a019b';
 
-  function onSearch(txt=false) {
-    const ciudadEjemplo = {
-      min: 32,
-      max: 35,
-      img: "03n",
-      id: 2172797,
-      wind: 3.6,
-      temp: 300.15,
-      name: "Cairns",
-      weather: "Clouds",
-      clouds: 40,
-      latitud: -16.92,
-      longitud: 145.77
-    };
-    if(txt){
-      ciudadEjemplo.name = txt;
-    }
-    let newCity = [...cities, ciudadEjemplo]
-    setCities(newCity);
+  function onSearch(ciudad) {
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric`)
+      .then(r => r.json())
+      .then((recurso) => {
+        if(recurso.main){
+          const ciudad = {
+            min: Math.round(recurso.main.temp_min),
+            max: Math.round(recurso.main.temp_max),
+            img: recurso.weather[0].icon,
+            id: recurso.id,
+            wind: recurso.wind.speed,
+            temp: recurso.main.temp,
+            name: recurso.name,
+            weather: recurso.weather[0].main,
+            clouds: recurso.clouds.all,
+            latitud: recurso.coord.lat,
+            longitud: recurso.coord.lon
+          };
+          let newCity = [...cities, ciudad]
+          setCities(newCity);
+        } else {
+          alert("Ciudad no encontrada");
+        }});
   }
 
-  return (
-    <div className="App">
-      <Nav onSearch={onSearch}/>
-      <Cards cities={cities}/>
-    </div>
+  function onClose(id) {
+    setCities(cities => cities.filter(c => c.id === null))
+  }
+  
+  return (<>
+          <Video />
+          <div className="App">
+            <Nav onSearch={onSearch}/>
+            <Cards cities={cities} onClose={onClose}/>
+          </div>
+  </>
   );
 }
