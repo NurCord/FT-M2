@@ -1,0 +1,196 @@
+<!-- // Framework ? => marco de trabajo que proveen herramientas
+
+//_____________________Bootstrap_______________________________
+
+Grid System
+
+col- (extra small devices - menos de 576px)
+.col-sm- (small devices - mayor o igual a 576px)
+.col-md- (medium devices - mayor o igual a 768px)
+.col-lg- (large devices - mayor o igual a 992px)
+.col-xl- (xlarge devices - mayor o igual a 1200px)
+
+CSS Preprocessors
+programa que te permite generar
+CSS a partir de la syntax única del preprocesador.
+
+
+LESS!!!!!!!
+
+
+http://lesscss.org/less-preview/
+
+
+!!!!!!!Variables!!!!!!!!
+___________________________
+
+con el @ guardamos en una variable 
+
+@colorFondo: #F55;
+@colorLetra: black;
+@width: 10px;
+@height: @width + 10px;
+
+También es posible realizar operaciones sobre las variables 
+
+h1 {
+    background-color: @colorFondo;
+    width: @width;
+    height: @height;
+}
+
+h2 {
+    background-color: colorLetra;
+}
+
+!!!Funciones!!!!!
+__________________
+
+@base: #f04615;
+@width: 0.5;
+
+.class {
+    width: percentage(@width);
+    color: saturate(@base, 5%);
+    background-color: spin(lighten(@base, 25%), 8);
+}
+
+
+!!!!!!!Anidado!!!!!!!
+_____________________
+
+nav {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    li {
+    display: inline-block;
+    }
+    a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+    }
+}
+
+
+!!!!!!Importaciones!!!!!!!!!!!
+______________________________
+
+
+@import "general";
+    
+body {
+        font-family: Helvetica, sans-serif;
+        font-size: 18px;
+        color: red;
+}
+
+!!!!!!!!!!!!Mixins!!!!!!!!!!!!!
+_______________________________
+
+me permite setar cosas por defaoult 
+puedo pasar parametros
+
+.important-text {
+        color: black;
+        font-size: 25px;
+        font-weight: bold; 
+}
+.danger {
+    .important-text();// me trae e invoca una clase anterior
+    background-color: red; 
+}
+ .success {
+        .important-text();
+        background-color: green; 
+}
+
+!!!!!!!!Mixing con parametros!!!!!!!!!!!!!!
+___________________________________________
+
+
+.bordered(@color: plumb; @width: 10px) {//por default
+    border: @width solid @color;
+}
+
+.myArticle {
+    .bordered(blue; 1px); // aca la llamo pero con otros parametros
+}
+
+
+// Es posible indicar el nombre del parámetro al invocar el mixin
+// para evitar tener que respetar un orden en particular
+
+
+.myArticle-2 {
+    .bordered(@width: 20px; @color: #33acfe);
+}
+
+!!!!!!!!!!!!Herencia!!!!!!!!!!!!!!
+__________________________________
+
+toma todo lo del padre y modifico lo que quiero
+
+.button-basic {
+    border: none;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer; 
+}
+
+.button-report {
+    &:extend(.button-basic); // heredo de la clase
+    background-color: red; // piso un color
+}
+
+.button-submit {
+    &:extend(.button-basic);
+    background-color: green;
+    color:
+}
+@import 'nombre del archivo' 
+-->
+
+
+<html>
+
+<head>
+    <!-- nos copiamos el link -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4 
+<style media=" screen ">
+    
+    .buttonComun {
+        color: white;
+        background-color: red;
+        border-radius: 5px;
+    }
+    body {
+        background-color: red;
+        }
+    <!-- Pantallas de menos de 992px de ancho -->
+    @media screen and (max-width: 992px) {
+            body {
+                background-color: blue;
+            }
+    }
+    <!-- Pantallas de menos de 600px de ancho --> 
+    @media screen and (max-width: 600px) {
+        body {
+            background-color: black;
+        }
+    }
+    
+</style>
+</head> 
+
+<body>
+<button type="button " class="buttonComun ">Boton Común</button>
+<button class="btn btn-danger ">Boton Bootstrap</button>
+</body>
+
+</html>

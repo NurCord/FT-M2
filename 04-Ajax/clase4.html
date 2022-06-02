@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="./clase4.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <button class="all">Trae todos los pedidos</button>
+        <button class="pedidos">Consulta pedidos</button>
+        <button class="boton">Clase</button>
+        <input name="index" type="text" />
+        <button class="pedido">Consulta el pedido indicado</button>
+    </div>
+    <script>
+        //es lo mismo que document.querySelector('.pedidos');
+        //   boton => accion =>consecuencia(cb) 
+        $('.pedidos').click(function() {
+            //anda a preguntar a esta ruta
+            $.get('https://jsonplaceholder.typicode.com/posts', function(response) {
+                console.log(response);
+                response.forEach(element => $(`<div id='${element.id}'>
+                        <p>Title: ${element.title}</p>
+                        <p>Body: ${element.body}</p>
+                        </div>`).appendTo('body'));
+            });
+        })
+
+        /* let index = 1;
+        $('.boton').click(function() {
+            //anda a preguntar a esta ruta
+            $.get('https://jsonplaceholder.typicode.com/photos/`${index}`', function(data) {
+                //tengo que llamar las imagenes
+                index++;
+            });
+        }) */
+        $('.boton').click(() => {
+            $.post('https://jsonplaceholder.typicode.com/posts', {
+                title: 'Mi primer posteo',
+                Body: 'Datos que invento para postear',
+                userId: 1,
+            }, (data) => {
+                console.log('Te salio bien el poste', data)
+            })
+        });
+    </script>
+</body>
+
+</html>
