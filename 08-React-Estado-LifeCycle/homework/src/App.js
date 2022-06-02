@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import './App.css';
 import Cards from './components/Cards';
 import Nav from './components/Nav';
-
+import data from './data'
 
 export default function App() {
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState(data);
 
-  function onSearch(ciudad) {
-    //Acá habría que hacer el llamado a la API para obtener los datos de la ciudad
-    //pero de momento agregaremos una ciudad por default para ver que funcione
-
+  function onSearch(txt=false) {
     const ciudadEjemplo = {
       min: 32,
       max: 35,
@@ -24,13 +21,17 @@ export default function App() {
       latitud: -16.92,
       longitud: 145.77
     };
-    setCities(oldCities => [...oldCities, ciudadEjemplo]);
+    if(txt){
+      ciudadEjemplo.name = txt;
+    }
+    let newCity = [...cities, ciudadEjemplo]
+    setCities(newCity);
   }
 
   return (
     <div className="App">
       <Nav onSearch={onSearch}/>
-      <Cards />
+      <Cards cities={cities}/>
     </div>
   );
 }

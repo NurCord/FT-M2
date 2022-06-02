@@ -10,7 +10,8 @@ function Navx({onSearch}) {
     <Container>
     <Navbar.Brand href="#home">Navbar</Navbar.Brand>
     <Nav className="me-auto">
-      <Nav.Link href="#home"><SearchBar onSearch={onSearch}/></Nav.Link>
+      <Nav.Link href="#home"></Nav.Link>
+      <SearchBar onSearch={onSearch}/>
     </Nav>
     </Container>
   </Navbar>
