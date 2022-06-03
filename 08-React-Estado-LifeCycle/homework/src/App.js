@@ -10,9 +10,14 @@ export default function App() {
 
   function onSearch(ciudad) {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric`)
-      .then(r => r.json())
-      .then((recurso) => {
-        if(recurso.main){
+    .then(r => r.json())
+    .then((recurso) => {
+      /* cities.map(e => {
+        if(e.id !== recurso.id)
+      }) */
+
+      if(recurso.main){
+          console.log(cities);
           const ciudad = {
             min: Math.round(recurso.main.temp_min),
             max: Math.round(recurso.main.temp_max),
@@ -26,15 +31,16 @@ export default function App() {
             latitud: recurso.coord.lat,
             longitud: recurso.coord.lon
           };
+
           let newCity = [...cities, ciudad]
           setCities(newCity);
-        } else {
+        }else {
           alert("Ciudad no encontrada");
         }});
   }
 
   function onClose(id) {
-    setCities(cities => cities.filter(c => c.id === null))
+    setCities(cities => cities.filter(c => c.id !== id))
   }
   
   return (<>
