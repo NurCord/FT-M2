@@ -5,11 +5,13 @@ import Nav from '../components/Nav.jsx';
 import Cards from '../components/Cards.jsx';
 import { Route, Routes } from 'react-router-dom';
 import About from '../components/About';
+import Ciudad from '../components/Ciudad';
 
 const apiKey = '4ae2636d8dfbdc3044bede63951a019b';
 
 function App() {
   const [cities, setCities] = useState([]);
+
   function onClose(id) {
     setCities(oldCities => oldCities.filter(c => c.id !== id));
   }
@@ -38,18 +40,14 @@ function App() {
         }
       });
   }
-  function onFilter(ciudadId) {
-    let ciudad = cities.filter(c => c.id === parseInt(ciudadId));
-    if (ciudad.length > 0) {
-      return ciudad[0];
-    } else {
-      return null;
-    }
-  }
+
+
   return (
     <div className="App">
       <Nav onSearch={onSearch}></Nav>
       <Routes>
+        <Route path='/' element={<Cards cities={cities} onClose={onClose} />}/>
+        <Route path='/ciudad/:id' element={<Ciudad cities={cities}/>}/>
         <Route path="/about" element={<About onSearch={onSearch}></About>} />
       </Routes>
     </div>

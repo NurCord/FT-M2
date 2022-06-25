@@ -6,8 +6,7 @@ export const Div = styled.div`
   justify-content: center;
   width: 300px;
   height: auto;
-  background: #000;
-  opacity: 0.7;
+  
 `;
 
 export const Button = styled.button`
